@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumo de Vendas - CasaFácil</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Imobiliária <span class="accent">CasaFácil</span></h1>
+      <nav class="nav">
+        <a href="/">Voltar para Imóveis</a>
+        <a href="/vendas/create">Registrar Venda</a>
+        <a href="/vendas">Lista de Vendas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Resumo de Vendas</h2>
+
+    <div class="grid-resumo">
+      <div class="card">
+        <h3>Total de Vendas</h3>
+        <p><%= totalVendas %></p>
+      </div>
+
+      <div class="card">
+        <h3>Valor Total Arrecadado</h3>
+        <p>R$ <%= totalValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Vendas - CasaFácil</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Imobiliária <span class="accent">CasaFácil</span></h1>
+      <nav class="nav">
+        <a href="/">Voltar para Imóveis</a>
+        <a href="/vendas/create">Registrar Venda</a>
+        <a href="/vendas/resumo">Resumo de Vendas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Lista de Vendas</h2>
+
+    <% if (!vendas || vendas.length === 0) { %>
+      <p>Nenhuma venda registrada ainda.</p>
+    <% } else { %>
+      <table class="table-vendas">
+        <thead>
+          <tr>
+            <th>Imóvel</th>
+            <th>Valor da Venda</th>
+            <th>Data da Venda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% vendas.forEach(venda => { %>
+            <tr>
+              <td><%= venda.imovel ? venda.imovel.titulo : "—" %></td>
+              <td>R$ <%= venda.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></td>
+              <td><%= venda.dataVenda ? new Date(venda.dataVenda).toLocaleDateString('pt-BR') : "—" %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </main>
+</body>
+</html>

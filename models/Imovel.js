@@ -37,6 +37,11 @@ const Imovel = sequelize.define("Imovel", {
   imagem: {
     type: DataTypes.STRING(255),
     allowNull: true
+  },
+  vendido: { 
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 });
 

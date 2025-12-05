@@ -35,6 +35,28 @@ body {
   color: #ffd700;
 }
 
+/* Barra de navegação interna */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background: #004999;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  background: #003366;
+}
+
 /* Formulário */
 form.form {
   background: #fff;
@@ -77,6 +99,7 @@ form.form .checkbox {
   gap: 10px;
 }
 
+/* Botões */
 .btn {
   background: #0066cc;
   color: #fff;
@@ -97,6 +120,27 @@ form.form .checkbox {
 
 .btn.danger:hover {
   background: #990000;
+}
+
+/* Botão vender */
+.btn.success {
+  background: #28a745;
+}
+
+.btn.success:hover {
+  background: #218838;
+}
+
+/* Estado vendido */
+.sold {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #6c757d;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 /* Grid de imóveis */
@@ -203,7 +247,71 @@ form.form .checkbox {
   margin-bottom: 5px;
 }
 
+/* Tabela de vendas */
+.table-vendas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-vendas th,
+.table-vendas td {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.table-vendas th {
+  background: #0066cc;
+  color: #fff;
+}
+
+.table-vendas td .btn {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+/* Resumo de vendas */
+.resumo-vendas {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.resumo-vendas .card {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.resumo-vendas .card h3 {
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.resumo-vendas .card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
 /* Responsividade */
+@media (max-width: 768px) {
+  .resumo-vendas {
+    flex-direction: column;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 @media (max-width: 600px) {
   .form .row {
     flex-direction: column;
@@ -213,3 +321,148 @@ form.form .checkbox {
     padding: 15px;
   }
 }
+/* Grid para resumo de vendas */
+.resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.table-vendas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-vendas th,
+.table-vendas td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.table-vendas th {
+  background: #0066cc;
+  color: #fff;
+}
+
+.table-vendas tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.table-vendas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-vendas th, .table-vendas td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.table-vendas th {
+  background: #0066cc;
+  color: #fff;
+}
+
+.table-vendas tr:hover {
+  background: #f1f1f1;
+}
+
+.grid-resumo {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.grid-resumo .card {
+  background: #fff;
+  flex: 1 1 200px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.grid-resumo .card h3 {
+  margin-bottom: 10px;
+  color: #0066cc;
+}
+
+/* Estilização específica para a página de vendas */
+.form label select,
+.form label input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form label select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff url('data:image/svg+xml;utf8,<svg fill="%230066cc" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+  background-size: 16px 16px;
+  cursor: pointer;
+}
+
+.table-vendas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.table-vendas th,
+.table-vendas td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-vendas th {
+  background-color: #0066cc;
+  color: #fff;
+  font-weight: 600;
+}
+
+.table-vendas tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsividade para tabela de vendas */
+@media (max-width: 768px) {
+  .table-vendas thead {
+    display: none;
+  }
+  .table-vendas tr {
+    display: block;
+    margin-bottom: 15px;
+  }
+  .table-vendas td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+  .table-vendas td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
+
+

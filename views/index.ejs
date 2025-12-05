@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Imobiliária CasaFácil</title>
 
-  <!-- CSS correto -->
+  <!-- CSS -->
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container">
       <h1 class="logo">Imobiliária <span class="accent">CasaFácil</span></h1>
+      <nav class="nav">
+        <a href="/vendas">Lista de Vendas</a>
+        <a href="/vendas/resumo">Resumo de Vendas</a>
+      </nav>
     </div>
   </header>
-
 
   <main class="container">
 
@@ -63,65 +66,72 @@
 
     <h2>Imóveis cadastrados</h2>
 
-<section class="grid">
-  <% if (!imoveis || imoveis.length === 0) { %>
-    <p>Nenhum imóvel cadastrado ainda.</p>
-  <% } else { %>
-    <% imoveis.forEach(imovel => { %>
-      <article class="card">
-        <div class="thumb">
-          <% if (imovel.imagem) { %>
-            <img src="/uploads/<%= imovel.imagem %>" alt="<%= imovel.titulo %>">
-          <% } else { %>
-            <img src="https://via.placeholder.com/400x250?text=Sem+imagem" alt="sem imagem">
-          <% } %>
-        </div>
-        <div class="card-body">
-          <h3><%= imovel.titulo %></h3>
-          <p class="price">
-            R$ <%= imovel.preco ? imovel.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : "—" %>
-          </p>
-          <p class="address"><%= imovel.endereco || "Endereço não informado" %></p>
-          <div class="actions">
-            <button class="btn" onclick="abrirModal(<%= imovel.id %>)">Saiba mais</button>
-            <a class="btn danger" href="/delete/<%= imovel.id %>" onclick="return confirm('Deseja excluir este imóvel?')">Excluir</a>
+    <section class="grid">
+      <% if (!imoveis || imoveis.length === 0) { %>
+        <p>Nenhum imóvel cadastrado ainda.</p>
+      <% } else { %>
+        <% imoveis.forEach(imovel => { %>
+          <article class="card">
+            <div class="thumb">
+              <% if (imovel.imagem) { %>
+                <img src="/uploads/<%= imovel.imagem %>" alt="<%= imovel.titulo %>">
+              <% } else { %>
+                <img src="https://via.placeholder.com/400x250?text=Sem+imagem" alt="sem imagem">
+              <% } %>
+            </div>
+            <div class="card-body">
+              <h3><%= imovel.titulo %></h3>
+              <p class="price">
+                R$ <%= imovel.preco ? imovel.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : "—" %>
+              </p>
+              <p class="address"><%= imovel.endereco || "Endereço não informado" %></p>
+              <div class="actions">
+                <button class="btn" onclick="abrirModal(<%= imovel.id %>)">Saiba mais</button>
+                <a class="btn danger" href="/delete/<%= imovel.id %>" onclick="return confirm('Deseja excluir este imóvel?')">Excluir</a>
+
+                <% if (!imovel.vendido) { %>
+                  <a class="btn success" href="/vendas/create?imovelId=<%= imovel.id %>">Vender</a>
+                <% } else { %>
+                  <span class="sold">Vendido</span>
+                <% } %>
+              </div>
+            </div>
+          </article>
+
+          <!-- Modal de detalhes -->
+          <div class="modal" id="modal-<%= imovel.id %>">
+            <div class="modal-content">
+              <span class="close" onclick="fecharModal(<%= imovel.id %>)">&times;</span>
+              <h2><%= imovel.titulo %></h2>
+              <p class="price">
+                R$ <%= imovel.preco ? imovel.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : "—" %>
+              </p>
+              <p><strong>Endereço:</strong> <%= imovel.endereco || "—" %></p>
+              <p><strong>Descrição:</strong> <%= imovel.descricao || "—" %></p>
+              <ul class="specs">
+                <li><strong>Quartos:</strong> <%= (imovel.quartos != null ? imovel.quartos : "—") %></li>
+                <li><strong>Banheiros:</strong> <%= (imovel.banheiros != null ? imovel.banheiros : "—") %></li>
+                <li><strong>Área:</strong> <%= imovel.area ? imovel.area + " m²" : "—" %></li>
+                <li><strong>Garagem:</strong> <%= (imovel.garagem ? "Sim" : "Não") %></li>
+              </ul>
+              <% if (imovel.imagem) { %>
+                <img src="/uploads/<%= imovel.imagem %>" alt="<%= imovel.titulo %>" style="max-width:100%;border-radius:8px;">
+              <% } %>
+            </div>
           </div>
-        </div>
-      </article>
+        <% }) %>
+      <% } %>
+    </section>
 
-      <!-- Modal de detalhes -->
-      <div class="modal" id="modal-<%= imovel.id %>">
-        <div class="modal-content">
-          <span class="close" onclick="fecharModal(<%= imovel.id %>)">&times;</span>
-          <h2><%= imovel.titulo %></h2>
-          <p class="price">
-            R$ <%= imovel.preco ? imovel.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : "—" %>
-          </p>
-          <p><strong>Endereço:</strong> <%= imovel.endereco || "—" %></p>
-          <p><strong>Descrição:</strong> <%= imovel.descricao || "—" %></p>
-          <ul class="specs">
-            <li><strong>Quartos:</strong> <%= (imovel.quartos != null ? imovel.quartos : "—") %></li>
-            <li><strong>Banheiros:</strong> <%= (imovel.banheiros != null ? imovel.banheiros : "—") %></li>
-            <li><strong>Área:</strong> <%= imovel.area ? imovel.area + " m²" : "—" %></li>
-            <li><strong>Garagem:</strong> <%= (imovel.garagem ? "Sim" : "Não") %></li>
-          </ul>
-          <% if (imovel.imagem) { %>
-            <img src="/uploads/<%= imovel.imagem %>" alt="<%= imovel.titulo %>" style="max-width:100%;border-radius:8px;">
-          <% } %>
-        </div>
-      </div>
-    <% }) %>
-  <% } %>
-</section>
+  </main>
 
-<script>
-function abrirModal(id) {
-  document.getElementById(`modal-${id}`).style.display = 'flex';
-}
-function fecharModal(id) {
-  document.getElementById(`modal-${id}`).style.display = 'none';
-}
-</script>
-
+  <script>
+    function abrirModal(id) {
+      document.getElementById(`modal-${id}`).style.display = 'flex';
+    }
+    function fecharModal(id) {
+      document.getElementById(`modal-${id}`).style.display = 'none';
+    }
+  </script>
 </body>
 </html>
